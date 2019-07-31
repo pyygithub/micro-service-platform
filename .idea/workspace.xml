@@ -1,7 +1,41 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="21b90236-9407-4d6a-ac89-3f73cb7cd4d7" name="Default" comment="" />
+    <list default="true" id="21b90236-9407-4d6a-ac89-3f73cb7cd4d7" name="Default" comment="">
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.gitignore" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/microservice-auth-center/target/classes/application.yml" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/microservice-auth-center/target/classes/com/thtf/AuthCenterApplication.class" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/microservice-auth-center/target/classes/com/thtf/common/Constants.class" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/microservice-auth-center/target/classes/com/thtf/common/exception/CustomException.class" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/microservice-auth-center/target/classes/com/thtf/common/exception/handler/GlobalExceptionHandler.class" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/microservice-auth-center/target/classes/com/thtf/common/response/QueryResult.class" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/microservice-auth-center/target/classes/com/thtf/common/response/Result.class" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/microservice-auth-center/target/classes/com/thtf/common/response/ResultCode.class" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/microservice-auth-center/target/classes/com/thtf/security/MyUserDetailsService.class" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/microservice-auth-center/target/classes/com/thtf/web/rest/HelloController.class" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/microservice-auth-center/target/classes/resources/error/404.html" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/microservice-auth-center/target/classes/resources/error/500.html" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/microservice-auth-center/target/classes/resources/login.html" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/microservice-auth-center/target/classes/resources/static/img/404.png" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/microservice-auth-center/target/maven-archiver/pom.properties" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/microservice-auth-center/target/maven-status/maven-compiler-plugin/compile/default-compile/createdFiles.lst" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/microservice-auth-center/target/maven-status/maven-compiler-plugin/compile/default-compile/inputFiles.lst" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/microservice-auth-center/target/maven-status/maven-compiler-plugin/testCompile/default-testCompile/inputFiles.lst" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/microservice-auth-center/target/microservice-auth-center-1.0-SNAPSHOT.jar" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/microservice-security/target/classes/com/thtf/security/browser/BrowserSecurityConfig.class" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/microservice-security/target/classes/com/thtf/security/browser/BrowserSecurityController.class" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/microservice-security/target/classes/com/thtf/security/browser/authentication/MyAuthenticationFailureHandler.class" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/microservice-security/target/classes/com/thtf/security/browser/authentication/MyAuthenticationSuccessHandler.class" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/microservice-security/target/classes/com/thtf/security/browser/support/SimpleResponse.class" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/microservice-security/target/classes/com/thtf/security/core/SecurityCoreConfig.class" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/microservice-security/target/classes/com/thtf/security/core/properties/BrowserProperties.class" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/microservice-security/target/classes/com/thtf/security/core/properties/LoginResponseType.class" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/microservice-security/target/classes/com/thtf/security/core/properties/SecurityConstants.class" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/microservice-security/target/classes/com/thtf/security/core/properties/SecurityProperties.class" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/microservice-security/target/classes/resources/signIn.html" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/microservice-security/target/maven-archiver/pom.properties" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/microservice-security/target/microservice-security-1.0-SNAPSHOT.jar" afterPath="" />
+    </list>
     <ignored path="$PROJECT_DIR$/microservice-security/target/" />
     <ignored path="$PROJECT_DIR$/microservice-auth-center/target/" />
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
@@ -13,121 +47,7 @@
   </component>
   <component name="ExecutionTargetManager" SELECTED_TARGET="default_target" />
   <component name="FileEditorManager">
-    <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file leaf-file-name="BrowserSecurityConfig.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/microservice-security/src/main/java/com/thtf/security/browser/BrowserSecurityConfig.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="135">
-              <caret line="29" column="0" lean-forward="true" selection-start-line="29" selection-start-column="0" selection-end-line="29" selection-end-column="0" />
-              <folding>
-                <element signature="imports" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="MyAuthenticationSuccessHandler.java" pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/microservice-security/src/main/java/com/thtf/security/browser/authentication/MyAuthenticationSuccessHandler.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="614">
-              <caret line="47" column="1" lean-forward="true" selection-start-line="47" selection-start-column="1" selection-end-line="47" selection-end-column="1" />
-              <folding>
-                <element signature="imports" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="Enum.java" pinned="false" current-in-tab="false">
-        <entry file="jar://C:/Java/jdk1.8.0_171/src.zip!/java/lang/Enum.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="257">
-              <caret line="141" column="25" lean-forward="false" selection-start-line="141" selection-start-column="25" selection-end-line="141" selection-end-column="25" />
-              <folding>
-                <element signature="e#4357#4358#0" expanded="true" />
-                <element signature="e#4391#4392#0" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="application.yml" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/microservice-auth-center/src/main/resources/application.yml">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="289">
-              <caret line="17" column="13" lean-forward="true" selection-start-line="17" selection-start-column="13" selection-end-line="17" selection-end-column="13" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="index.html" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/microservice-auth-center/src/main/resources/resources/index.html">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="85">
-              <caret line="5" column="7" lean-forward="true" selection-start-line="5" selection-start-column="7" selection-end-line="5" selection-end-column="7" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="BrowserProperties.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/microservice-security/src/main/java/com/thtf/security/core/properties/BrowserProperties.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="255">
-              <caret line="15" column="13" lean-forward="false" selection-start-line="15" selection-start-column="13" selection-end-line="15" selection-end-column="13" />
-              <folding>
-                <element signature="imports" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="AuthCenterApplication.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/microservice-auth-center/src/main/java/com/thtf/AuthCenterApplication.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="272">
-              <caret line="19" column="0" lean-forward="false" selection-start-line="19" selection-start-column="0" selection-end-line="19" selection-end-column="0" />
-              <folding>
-                <element signature="e#627#628#0" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="MyAuthenticationFailureHandler.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/microservice-security/src/main/java/com/thtf/security/browser/authentication/MyAuthenticationFailureHandler.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="274">
-              <caret line="44" column="0" lean-forward="false" selection-start-line="44" selection-start-column="0" selection-end-line="44" selection-end-column="0" />
-              <folding>
-                <element signature="imports" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="LoginResponseType.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/microservice-security/src/main/java/com/thtf/security/core/properties/LoginResponseType.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="255">
-              <caret line="15" column="12" lean-forward="false" selection-start-line="15" selection-start-column="4" selection-end-line="15" selection-end-column="12" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="HttpStatus.class" pinned="false" current-in-tab="false">
-        <entry file="jar://$MAVEN_REPOSITORY$/org/springframework/spring-web/5.0.10.RELEASE/spring-web-5.0.10.RELEASE.jar!/org/springframework/http/HttpStatus.class">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="257">
-              <caret line="79" column="4" lean-forward="false" selection-start-line="79" selection-start-column="4" selection-end-line="79" selection-end-column="4" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-    </leaf>
+    <leaf SIDE_TABS_SIZE_LIMIT_KEY="300" />
   </component>
   <component name="FileTemplateManagerImpl">
     <option name="RECENT_TEMPLATES">
@@ -154,6 +74,9 @@
       <find>BasicError</find>
       <find>security</find>
     </findStrings>
+  </component>
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
   </component>
   <component name="GradleLocalSettings">
     <option name="externalProjectsViewState">
@@ -264,6 +187,9 @@
       </profile-state>
     </entry>
   </component>
+  <component name="ProjectLevelVcsManager">
+    <ConfirmationsSetting value="2" id="Add" />
+  </component>
   <component name="ProjectView">
     <navigator currentView="ProjectPane" proportions="" version="1">
       <flattenPackages />
@@ -291,6 +217,34 @@
             </PATH_ELEMENT>
             <PATH_ELEMENT>
               <option name="myItemId" value="security" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="security" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="security" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="microservice-security" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="security" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="security" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="microservice-auth-center" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
           </PATH>
@@ -718,12 +672,12 @@
       <option name="presentableId" value="Default" />
       <updated>1564449638495</updated>
       <workItem from="1564449639862" duration="15625000" />
-      <workItem from="1564554320764" duration="10166000" />
+      <workItem from="1564554320764" duration="10700000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="25791000" />
+    <option name="totallyTimeSpent" value="26325000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="127" y="23" width="1813" height="933" extended-state="0" />
@@ -800,14 +754,6 @@
     <option name="FILTER_TARGETS" value="false" />
   </component>
   <component name="editorHistoryManager">
-    <entry file="jar://$MAVEN_REPOSITORY$/org/springframework/security/spring-security-web/5.0.9.RELEASE/spring-security-web-5.0.9.RELEASE.jar!/org/springframework/security/web/access/intercept/FilterSecurityInterceptor.class">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="510">
-          <caret line="61" column="0" lean-forward="false" selection-start-line="61" selection-start-column="0" selection-end-line="61" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="jar://$MAVEN_REPOSITORY$/org/springframework/security/spring-security-web/5.0.9.RELEASE/spring-security-web-5.0.9.RELEASE.jar!/org/springframework/security/web/access/ExceptionTranslationFilter.class">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="-357">
@@ -1191,7 +1137,7 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/microservice-security/src/main/java/com/thtf/security/browser/authentication/MyAuthenticationFailureHandler.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="274">
+        <state relative-caret-position="543">
           <caret line="44" column="0" lean-forward="false" selection-start-line="44" selection-start-column="0" selection-end-line="44" selection-end-column="0" />
           <folding>
             <element signature="imports" expanded="true" />
@@ -1242,6 +1188,14 @@
           <folding>
             <element signature="imports" expanded="true" />
           </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/.gitignore">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-830">
+          <caret line="19" column="27" lean-forward="true" selection-start-line="19" selection-start-column="27" selection-end-line="19" selection-end-column="27" />
+          <folding />
         </state>
       </provider>
     </entry>
