@@ -37,7 +37,7 @@ import java.io.IOException;
 @Slf4j
 public class BrowserSecurityController {
 
-//    private RequestCache requestCache = new HttpSessionRequestCache();
+    private RequestCache requestCache = new HttpSessionRequestCache();
 
     private RedirectStrategy redirectStrategy = new DefaultRedirectStrategy();
 
@@ -56,20 +56,15 @@ public class BrowserSecurityController {
     @ResponseStatus(code = HttpStatus.UNAUTHORIZED)
     public SimpleResponse requireAuthentication(HttpServletRequest request, HttpServletResponse response)
             throws IOException {
-        String accept = request.getHeader("Accept");
-        if (accept.contains("text/html")) {
-            log.info("浏览器请求， accept: {}", accept);
-            redirectStrategy.sendRedirect(request, response, securityProperties.getBrowser().getLoginPage());
-        }
 
-//        SavedRequest savedRequest = requestCache.getRequest(request, response);
-//        if (savedRequest != null) {
-//            String targetUrl = savedRequest.getRedirectUrl();
-//            log.info("引发跳转的请求是:" + targetUrl);
-//            if (StringUtils.endsWithIgnoreCase(targetUrl, ".html")) {
-//                redirectStrategy.sendRedirect(request, response, securityProperties.getBrowser().getLoginPage());
-//            }
-//        }
+        SavedRequest savedRequest = requestCache.getRequest(request, response);
+        if (savedRequest != null) {
+            String targetUrl = savedRequest.getRedirectUrl();
+            log.info("引发跳转的请求是:" + targetUrl);
+            if (StringUtils.endsWithIgnoreCase(targetUrl, ".html")) {
+                redirectStrategy.sendRedirect(request, response, securityProperties.getBrowser().getLoginPage());
+            }
+        }
         return new SimpleResponse("访问的服务需要身份认证，请引导用户到登录页");
     }
 }

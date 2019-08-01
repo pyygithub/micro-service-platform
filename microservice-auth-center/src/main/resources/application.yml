@@ -19,8 +19,6 @@ spring:
     #连接超时时间
     timeout: 5000
 
-
-
 #Security 配置
 security:
   browser:
@@ -28,4 +26,13 @@ security:
     #loginPage: /login.html
 
     #登录类型配置：JSON（默认）  REDIRECT
-    loginType: REDIRECT
+    loginType: JSON
+
+  # 验证码配置
+  code:
+    image:
+      length: 4
+      height: 23
+      width: 67
+      expireIn: 60
+      url:

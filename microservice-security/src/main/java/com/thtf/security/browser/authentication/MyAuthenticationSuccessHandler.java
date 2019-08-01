@@ -3,6 +3,7 @@ package com.thtf.security.browser.authentication;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.thtf.security.core.properties.LoginResponseType;
 import com.thtf.security.core.properties.SecurityProperties;
+import com.thtf.security.browser.support.ResponseResult;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.Authentication;
@@ -39,7 +40,7 @@ public class MyAuthenticationSuccessHandler extends SavedRequestAwareAuthenticat
 
         if (LoginResponseType.JSON.equals(securityProperties.getBrowser().getLoginType())) {
             response.setContentType("application/json;charset=UTF-8");
-            response.getWriter().write(objectMapper.writeValueAsString(authentication));
+            response.getWriter().write(objectMapper.writeValueAsString(ResponseResult.SUCCESS(authentication.getPrincipal())));
         } else {
             super.onAuthenticationSuccess(request, response, authentication);
         }
