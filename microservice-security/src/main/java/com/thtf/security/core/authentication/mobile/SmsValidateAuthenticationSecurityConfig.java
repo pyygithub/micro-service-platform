@@ -23,10 +23,10 @@ import org.springframework.stereotype.Component;
 @Component
 public class SmsValidateAuthenticationSecurityConfig extends SecurityConfigurerAdapter<DefaultSecurityFilterChain, HttpSecurity> {
     @Autowired
-    private AuthenticationSuccessHandler imoocAuthenticationSuccessHandler;
+    private AuthenticationSuccessHandler myAuthenticationSuccessHandler;
 
     @Autowired
-    private AuthenticationFailureHandler imoocAuthenticationFailureHandler;
+    private AuthenticationFailureHandler myAuthenticationFailureHandler;
 
     @Autowired
     private UserDetailsService userDetailsService;
@@ -36,8 +36,8 @@ public class SmsValidateAuthenticationSecurityConfig extends SecurityConfigurerA
 
         SmsValidateCodeAuthenticationFilter smsCodeAuthenticationFilter = new SmsValidateCodeAuthenticationFilter();
         smsCodeAuthenticationFilter.setAuthenticationManager(http.getSharedObject(AuthenticationManager.class));
-        smsCodeAuthenticationFilter.setAuthenticationSuccessHandler(imoocAuthenticationSuccessHandler);
-        smsCodeAuthenticationFilter.setAuthenticationFailureHandler(imoocAuthenticationFailureHandler);
+        smsCodeAuthenticationFilter.setAuthenticationSuccessHandler(myAuthenticationSuccessHandler);
+        smsCodeAuthenticationFilter.setAuthenticationFailureHandler(myAuthenticationFailureHandler);
 
         SmsValidateCodeAuthenticationProvider smsCodeAuthenticationProvider = new SmsValidateCodeAuthenticationProvider();
         smsCodeAuthenticationProvider.setUserDetailsService(userDetailsService);
