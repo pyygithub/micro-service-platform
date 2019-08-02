@@ -2,6 +2,8 @@ package com.thtf.security.core.validate.code;
 
 import com.thtf.security.core.properties.SecurityProperties;
 import com.thtf.security.core.validate.code.image.ImageValidateCodeGenerator;
+import com.thtf.security.core.validate.code.sms.DefaultSmsValidateCodeSender;
+import com.thtf.security.core.validate.code.sms.SmsValidateCodeSender;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnMissingBean;
 import org.springframework.context.annotation.Bean;
@@ -9,6 +11,7 @@ import org.springframework.context.annotation.Configuration;
 
 /**
  * ========================
+ * 验证码Bean配置
  * Created with IntelliJ IDEA.
  * User：pyy
  * Date：2019/8/1 14:13
@@ -29,10 +32,10 @@ public class ValidateCodeBeanConfig {
         return codeGenerator;
     }
 
-//    @Bean
-//    @ConditionalOnMissingBean(SmsValidateCodeSender.class)
-//    public SmsValidateCodeSender smsCodeSender() {
-//        return new DefaultSmsCodeSender();
-//    }
+    @Bean
+    @ConditionalOnMissingBean(SmsValidateCodeSender.class)
+    public SmsValidateCodeSender smsCodeSender() {
+        return new DefaultSmsValidateCodeSender();
+    }
 
 }

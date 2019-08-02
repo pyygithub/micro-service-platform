@@ -17,7 +17,7 @@ import java.time.LocalDateTime;
 
 @Setter
 @Getter
-public abstract class ValidateCode {
+public class ValidateCode {
     /** 验证码 **/
     private String code;
 

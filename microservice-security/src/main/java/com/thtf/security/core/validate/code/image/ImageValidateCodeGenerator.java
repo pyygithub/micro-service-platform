@@ -24,7 +24,6 @@ public class ImageValidateCodeGenerator implements ValidateCodeGenerator {
     /**
      * 系统配置
      */
-    @Autowired
     private SecurityProperties securityProperties;
 
     @Override

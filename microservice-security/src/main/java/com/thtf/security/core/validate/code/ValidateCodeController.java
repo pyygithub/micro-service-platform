@@ -29,7 +29,7 @@ public class ValidateCodeController {
      *
      * @param request
      * @param response
-     * @param type
+     * @param type [image sms]
      * @throws Exception
      */
     @GetMapping(SecurityConstants.DEFAULT_VALIDATE_CODE_URL_PREFIX + "/{type}")

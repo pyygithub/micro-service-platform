@@ -14,7 +14,7 @@ import java.util.Map;
 
 /**
  * ========================
- * 验证码处理器抽象实现类
+ * 验证码处理器抽象实现类 - 模板方法模式
  * Created with IntelliJ IDEA.
  * User：pyy
  * Date：2019/8/1 11:51
@@ -37,8 +37,11 @@ public abstract class AbstractValidateCodeProcessor<C extends ValidateCode> impl
 
     @Override
     public void create(ServletWebRequest request) throws Exception {
+        // 1. 生成验证码
         C validateCode = generate(request);
+        // 2. 保存验证码
         save(request, validateCode);
+        // 3. 发送验证码
         send(request, validateCode);
     }
 

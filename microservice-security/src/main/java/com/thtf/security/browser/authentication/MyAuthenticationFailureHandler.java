@@ -61,6 +61,7 @@ public class MyAuthenticationFailureHandler extends SimpleUrlAuthenticationFailu
             } else if (exception instanceof LockedException) {
                 responseResult = new ResponseResult(ResponseCode.USER_LOCKED); // 用户已被锁定
             } else {
+                log.error(objectMapper.writeValueAsString(new SimpleResponse(exception.getMessage())));
                 responseResult = new ResponseResult(ResponseCode.USER_LOGIN_ERROR);
             }
             response.getWriter().write(objectMapper.writeValueAsString(responseResult));

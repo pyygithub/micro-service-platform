@@ -1,5 +1,6 @@
 package com.thtf.security.browser;
 
+import com.thtf.security.core.authentication.mobile.SmsValidateAuthenticationSecurityConfig;
 import com.thtf.security.core.properties.SecurityConstants;
 import com.thtf.security.core.properties.SecurityProperties;
 import com.thtf.security.core.validate.code.ValidateCodeSecurityConfig;
@@ -44,6 +45,9 @@ public class BrowserSecurityConfig extends WebSecurityConfigurerAdapter {
     private UserDetailsService userDetailsService;
 
     @Autowired
+    private SmsValidateAuthenticationSecurityConfig smsValidateAuthenticationSecurityConfig;
+
+    @Autowired
     private AuthenticationFailureHandler myAuthenticationFailureHandler;
 
     @Autowired
@@ -51,7 +55,11 @@ public class BrowserSecurityConfig extends WebSecurityConfigurerAdapter {
 
     @Override
     protected void configure(HttpSecurity http) throws Exception {
-        http.apply(validateCodeSecurityConfig).and()
+
+        http.apply(validateCodeSecurityConfig)
+                .and()
+            .apply(smsValidateAuthenticationSecurityConfig)
+                .and()
             .formLogin()
                 // 当需要身份认证时，跳转到这里
                 .loginPage(SecurityConstants.DEFAULT_UNAUTHENTICATION_URL)

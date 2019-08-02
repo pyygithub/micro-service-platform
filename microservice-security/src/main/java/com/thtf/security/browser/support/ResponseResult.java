@@ -1,5 +1,6 @@
 package com.thtf.security.browser.support;
 
+import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 import lombok.Data;
 
 /**
@@ -12,6 +13,7 @@ import lombok.Data;
  * ========================
  */
 @Data
+@JsonSerialize(include=JsonSerialize.Inclusion.NON_NULL)
 public class ResponseResult<T> {
     //操作代码
     int code;
