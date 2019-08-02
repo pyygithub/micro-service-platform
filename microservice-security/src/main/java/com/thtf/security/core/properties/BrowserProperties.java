@@ -16,7 +16,11 @@ import lombok.Setter;
 public class BrowserProperties {
     private String signOutUrl = SecurityConstants.DEFAULT_SING_OUT_URL;
 
+    private String signUpUrl = SecurityConstants.DEFAULT_SING_UP_URL;
+
     private String loginPage = SecurityConstants.DEFAULT_LOGIN_PAGE_URL;
+
+    private String staticResources = SecurityConstants.DEFAULT_STATIC_RESOURCES;
 
     // 登录方式：默认 返回JSON
     private LoginResponseType loginType = LoginResponseType.JSON;

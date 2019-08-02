@@ -22,11 +22,14 @@ spring:
 #Security 配置
 security:
   browser:
-    #自定义系统登录页面地址
+    # 自定义系统登录页面地址
     #loginPage: /login.html
-
-    #登录类型配置：JSON（默认）  REDIRECT
+    # 系统注册页面
+    signUpUrl: /signUp.html
+    # 登录类型配置：JSON（默认）  REDIRECT
     loginType: JSON
+    # 静态资源放行
+    staticResources: /static/**
 
   # 验证码配置
   code:
@@ -35,4 +38,13 @@ security:
       height: 23
       width: 67
       expireIn: 60
-      url:
+      url: /user/login
+  # 三方登录
+  social:
+    # social过滤路径
+    filterProcessesUrl: /auth
+    qq:
+      appId: 101744435
+      appSecret: 15abaee5e181376117ac7020a032fb5e
+      providerId: qq
+

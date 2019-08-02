@@ -17,6 +17,7 @@ import org.springframework.security.web.authentication.AuthenticationFailureHand
 import org.springframework.security.web.authentication.AuthenticationSuccessHandler;
 import org.springframework.security.web.authentication.rememberme.JdbcTokenRepositoryImpl;
 import org.springframework.security.web.authentication.rememberme.PersistentTokenRepository;
+import org.springframework.social.security.SpringSocialConfigurer;
 
 import javax.sql.DataSource;
 
@@ -53,12 +54,17 @@ public class BrowserSecurityConfig extends WebSecurityConfigurerAdapter {
     @Autowired
     private ValidateCodeSecurityConfig validateCodeSecurityConfig;
 
+    @Autowired
+    private SpringSocialConfigurer mySocialSecurityConfig;
+
     @Override
     protected void configure(HttpSecurity http) throws Exception {
 
         http.apply(validateCodeSecurityConfig)
                 .and()
             .apply(smsValidateAuthenticationSecurityConfig)
+                .and()
+            .apply(mySocialSecurityConfig)
                 .and()
             .formLogin()
                 // 当需要身份认证时，跳转到这里
@@ -82,7 +88,10 @@ public class BrowserSecurityConfig extends WebSecurityConfigurerAdapter {
                         SecurityConstants.DEFAULT_LOGIN_PROCESSING_URL_MOBILE,
                         SecurityConstants.DEFAULT_LOGIN_PAGE_URL,
                         securityProperties.getBrowser().getLoginPage(),
-                        SecurityConstants.DEFAULT_VALIDATE_CODE_URL_PREFIX + "/*"
+                        securityProperties.getBrowser().getSignUpUrl(),
+                        SecurityConstants.DEFAULT_VALIDATE_CODE_URL_PREFIX + "/*",
+                        securityProperties.getBrowser().getStaticResources(),
+                        "/user/binding"
                 ).permitAll()
 
                 // 其它所有请求必须验证后才可以访问
