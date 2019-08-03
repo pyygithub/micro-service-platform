@@ -4,6 +4,7 @@ import com.thtf.security.core.properties.SecurityProperties;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.core.annotation.Order;
 import org.springframework.security.crypto.encrypt.Encryptors;
 import org.springframework.social.config.annotation.EnableSocial;
 import org.springframework.social.config.annotation.SocialConfigurerAdapter;
@@ -26,6 +27,7 @@ import javax.sql.DataSource;
  */
 @Configuration
 @EnableSocial
+@Order(1)
 public class SocialConfig extends SocialConfigurerAdapter {
 
     @Autowired
@@ -49,7 +51,7 @@ public class SocialConfig extends SocialConfigurerAdapter {
     }
 
     @Bean
-    public SpringSocialConfigurer imoocSocialSecurityConfig() {
+    public SpringSocialConfigurer mySocialSecurityConfig() {
         String filterProcessesUrl = securityProperties.getSocial().getFilterProcessesUrl();
         MySpringSocialConfigurer configurer = new MySpringSocialConfigurer(filterProcessesUrl);
         configurer.signupUrl(securityProperties.getBrowser().getSignUpUrl());
