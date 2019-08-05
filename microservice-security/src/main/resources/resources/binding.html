@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>标准绑定页面</title>
+</head>
+<body>
+    <h2>标准绑定页面</h2>
+    <p>绑定请求地址：/connect/{providerId} 请求类型：post</p>
+    <p>接触绑定请求地址：/connect/{providerId} 请求类型：delete</p>
+    <p>其实底层就是向 "userconnection" 表添加、删除数据</p>
+    <hr/>
+    <form action="/connect/wechat" method="post">
+        <button type="submit">绑定微信</button>
+    </form>
+</body>
+</html>
