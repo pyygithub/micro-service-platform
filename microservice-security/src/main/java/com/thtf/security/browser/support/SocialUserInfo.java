@@ -15,7 +15,7 @@ import lombok.Data;
 public class SocialUserInfo {
     private String providerId;
 
-    private String providerUserId;
+    private String providerUserId; //openId
 
     private String nickname;
 
