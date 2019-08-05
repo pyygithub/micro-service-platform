@@ -1,5 +1,7 @@
 package com.thtf.security;
 
+import org.springframework.boot.web.embedded.tomcat.TomcatEmbeddedWebappClassLoader;
+import org.springframework.boot.web.embedded.tomcat.TomcatServletWebServerFactory;
 import org.springframework.social.connect.Connection;
 import org.springframework.social.connect.ConnectionSignUp;
 import org.springframework.stereotype.Component;

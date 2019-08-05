@@ -1,5 +1,6 @@
 package com.thtf.security.browser;
 
+import com.thtf.security.browser.session.CustomExpiredSessionStrategy;
 import com.thtf.security.core.authentication.mobile.SmsValidateAuthenticationSecurityConfig;
 import com.thtf.security.core.properties.SecurityConstants;
 import com.thtf.security.core.properties.SecurityProperties;
@@ -17,6 +18,8 @@ import org.springframework.security.web.authentication.AuthenticationFailureHand
 import org.springframework.security.web.authentication.AuthenticationSuccessHandler;
 import org.springframework.security.web.authentication.rememberme.JdbcTokenRepositoryImpl;
 import org.springframework.security.web.authentication.rememberme.PersistentTokenRepository;
+import org.springframework.security.web.session.InvalidSessionStrategy;
+import org.springframework.security.web.session.SessionInformationExpiredStrategy;
 import org.springframework.social.connect.web.ConnectController;
 import org.springframework.social.security.SpringSocialConfigurer;
 
@@ -58,6 +61,13 @@ public class BrowserSecurityConfig extends WebSecurityConfigurerAdapter {
     @Autowired
     private SpringSocialConfigurer mySocialSecurityConfig;
 
+    @Autowired
+    private SessionInformationExpiredStrategy sessionInformationExpiredStrategy;
+
+    @Autowired
+    private InvalidSessionStrategy invalidSessionStrategy;
+
+
     @Override
     protected void configure(HttpSecurity http) throws Exception {
 
@@ -81,8 +91,15 @@ public class BrowserSecurityConfig extends WebSecurityConfigurerAdapter {
                 .tokenRepository(persistentTokenRepository())
                 .tokenValiditySeconds(securityProperties.getBrowser().getRememberMeSeconds())
                 .userDetailsService(userDetailsService)
-
-                .and().authorizeRequests()
+                .and()
+            .sessionManagement()
+                .invalidSessionStrategy(invalidSessionStrategy)
+                .maximumSessions(securityProperties.getBrowser().getSession().getMaximumSessions())
+                .maxSessionsPreventsLogin(securityProperties.getBrowser().getSession().isMaxSessionsPreventsLogin())
+                .expiredSessionStrategy(sessionInformationExpiredStrategy)
+                .and()
+                .and()
+            .authorizeRequests()
                 // 不需要认证请求
                 .antMatchers(
                         SecurityConstants.DEFAULT_UNAUTHENTICATION_URL,
@@ -92,7 +109,7 @@ public class BrowserSecurityConfig extends WebSecurityConfigurerAdapter {
                         securityProperties.getBrowser().getSignUpUrl(),
                         SecurityConstants.DEFAULT_VALIDATE_CODE_URL_PREFIX + "/*",
                         securityProperties.getBrowser().getStaticResources(),
-                        "/user/binding"
+                        "/user/binding", "/session/invalid"
                 ).permitAll()
 
                 // 其它所有请求必须验证后才可以访问
