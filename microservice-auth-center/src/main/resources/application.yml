@@ -1,5 +1,5 @@
 server:
-  port: 8001
+  port: 80
 
 spring:
   session:
@@ -47,4 +47,7 @@ security:
       appId: 101744435
       appSecret: 15abaee5e181376117ac7020a032fb5e
       providerId: qq
-
+    wechat:
+      appId: wxd99431bbff8305a0
+      appSecret: 60f78681d063590a469f1b297feff3c4
+      providerId: wechat

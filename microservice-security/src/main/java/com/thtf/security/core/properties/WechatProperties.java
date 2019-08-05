@@ -1,5 +1,7 @@
 package com.thtf.security.core.properties;
 
+import lombok.Data;
+
 /**
  * ========================
  * Created with IntelliJ IDEA.
@@ -8,6 +10,7 @@ package com.thtf.security.core.properties;
  * Version: v1.0
  * ========================
  */
+@Data
 public class WechatProperties {
     private String appId;
     private String appSecret;
