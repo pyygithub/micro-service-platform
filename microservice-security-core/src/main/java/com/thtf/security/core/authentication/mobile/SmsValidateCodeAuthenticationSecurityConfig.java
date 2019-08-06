@@ -21,7 +21,7 @@ import org.springframework.stereotype.Component;
  * ========================
  */
 @Component
-public class SmsValidateAuthenticationSecurityConfig extends SecurityConfigurerAdapter<DefaultSecurityFilterChain, HttpSecurity> {
+public class SmsValidateCodeAuthenticationSecurityConfig extends SecurityConfigurerAdapter<DefaultSecurityFilterChain, HttpSecurity> {
     @Autowired
     private AuthenticationSuccessHandler myAuthenticationSuccessHandler;
 
