@@ -5,6 +5,7 @@ import lombok.Getter;
 import lombok.Setter;
 
 import java.awt.image.BufferedImage;
+import java.io.Serializable;
 import java.time.LocalDateTime;
 
 /**
@@ -18,8 +19,9 @@ import java.time.LocalDateTime;
  */
 @Setter
 @Getter
-public class ImageValidateCode extends ValidateCode {
+public class ImageValidateCode extends ValidateCode implements Serializable{
 
+    private static final long serialVersionUID = -2437256583627708614L;
     private BufferedImage image;
 
     public ImageValidateCode(BufferedImage image, String code, int expireIn){
