@@ -1,5 +1,6 @@
 package com.thtf.security.browser;
 
+import com.thtf.security.browser.logout.CustomLogoutSuccessHandler;
 import com.thtf.security.browser.session.CustomExpiredSessionStrategy;
 import com.thtf.security.browser.session.CustomInvalidSessionStrategy;
 import com.thtf.security.core.properties.SecurityProperties;
@@ -7,6 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnMissingBean;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.security.web.authentication.logout.LogoutSuccessHandler;
 import org.springframework.security.web.session.InvalidSessionStrategy;
 import org.springframework.security.web.session.SessionInformationExpiredStrategy;
 
@@ -33,5 +35,15 @@ public class BrowserSecurityBeanConfig {
     @ConditionalOnMissingBean(SessionInformationExpiredStrategy.class)
     public SessionInformationExpiredStrategy sessionInformationExpiredStrategy(){
         return new CustomExpiredSessionStrategy(securityProperties.getBrowser().getSession().getSessionInvalidUrl());
+    }
+
+    /**
+     * 默认退出成功控制器
+     * @return
+     */
+    @Bean
+    @ConditionalOnMissingBean(LogoutSuccessHandler.class)
+    public LogoutSuccessHandler logoutSuccessHandler() {
+        return new CustomLogoutSuccessHandler(securityProperties.getBrowser().getSignOutUrl());
     }
 }

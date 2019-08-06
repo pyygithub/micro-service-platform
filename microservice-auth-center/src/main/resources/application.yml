@@ -33,6 +33,8 @@ security:
     signUpUrl: /signUp.html
     # 登录类型配置：JSON（默认）  REDIRECT
     loginType: JSON
+    # 登录成功页面
+    signOutUrl: /signOut.html
     # 静态资源放行
     staticResources: /static/**
 
