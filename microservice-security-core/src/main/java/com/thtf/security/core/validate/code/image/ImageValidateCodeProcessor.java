@@ -1,6 +1,7 @@
 package com.thtf.security.core.validate.code.image;
 
-import com.thtf.security.core.validate.code.AbstractValidateCodeProcessor;
+import com.thtf.security.core.validate.code.impl.AbstractValidateCodeProcessor;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Component;
 import org.springframework.web.context.request.ServletWebRequest;
 
@@ -16,6 +17,7 @@ import javax.imageio.ImageIO;
  * ========================
  */
 @Component("imageValidateCodeProcessor")
+@Slf4j
 public class ImageValidateCodeProcessor extends AbstractValidateCodeProcessor<ImageValidateCode> {
 
     /**
@@ -23,6 +25,7 @@ public class ImageValidateCodeProcessor extends AbstractValidateCodeProcessor<Im
      */
     @Override
     protected void send(ServletWebRequest request, ImageValidateCode imageValidateCode) throws Exception {
+        log.info("图片验证码：{}", imageValidateCode.getCode());
         ImageIO.write(imageValidateCode.getImage(), "JPEG", request.getResponse().getOutputStream());
     }
 

@@ -3,6 +3,7 @@ package com.thtf.security.app;
 import com.thtf.security.core.authentication.mobile.SmsValidateCodeAuthenticationSecurityConfig;
 import com.thtf.security.core.properties.SecurityConstants;
 import com.thtf.security.core.properties.SecurityProperties;
+import com.thtf.security.core.validate.code.ValidateCodeSecurityConfig;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
@@ -35,6 +36,9 @@ public class CustomResourceServerConfig extends ResourceServerConfigurerAdapter 
     private DataSource dataSource;
 
     @Autowired
+    private ValidateCodeSecurityConfig validateCodeSecurityConfig;
+
+    @Autowired
     private AuthenticationSuccessHandler myAuthenticationSuccessHandler;
 
     @Autowired
@@ -49,8 +53,8 @@ public class CustomResourceServerConfig extends ResourceServerConfigurerAdapter 
     @Override
     public void configure(HttpSecurity http) throws Exception {
 
-        http//.apply(validateCodeSecurityConfig)
-            //    .and()
+        http.apply(validateCodeSecurityConfig)
+                .and()
                 .apply(smsValidateCodeAuthenticationSecurityConfig)
                 .and()
                 .apply(mySocialSecurityConfig)

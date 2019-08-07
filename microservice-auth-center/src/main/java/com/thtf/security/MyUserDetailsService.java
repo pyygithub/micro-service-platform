@@ -15,7 +15,7 @@ import org.springframework.stereotype.Component;
 
 /**
  * ========================
- * 自定义用户认证逻辑
+ * 自定义用户认证 DetailService
  * Created with IntelliJ IDEA.
  * User：pyy
  * Date：2019/7/31 14:51
@@ -29,12 +29,7 @@ public class MyUserDetailsService implements UserDetailsService, SocialUserDetai
     @Autowired
     private PasswordEncoder passwordEncoder;
 
-    /*
-     * (non-Javadoc)
-     *
-     * @see org.springframework.security.core.userdetails.UserDetailsService#
-     * loadUserByUsername(java.lang.String)
-     */
+
     @Override
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
         log.info("表单登录用户名:" + username);

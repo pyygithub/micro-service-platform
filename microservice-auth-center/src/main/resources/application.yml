@@ -17,7 +17,7 @@ spring:
     password: 123456
   redis:
     #数据库索引
-    database: 0
+    database: 1
     host: 10.10.50.230
     port: 6379
     password: 123456

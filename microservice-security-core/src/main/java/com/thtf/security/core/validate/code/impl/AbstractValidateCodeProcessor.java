@@ -1,6 +1,7 @@
-package com.thtf.security.core.validate.code;
+package com.thtf.security.core.validate.code.impl;
 
 import com.thtf.security.core.support.ResponseCode;
+import com.thtf.security.core.validate.code.*;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.lang.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -25,15 +26,13 @@ import java.util.Map;
 public abstract class AbstractValidateCodeProcessor<C extends ValidateCode> implements ValidateCodeProcessor {
 
     /**
-     * 操作session的工具类
-     */
-    private SessionStrategy sessionStrategy = new HttpSessionSessionStrategy();
-    /**
      * 收集系统中所有的 {@link ValidateCodeGenerator} 接口的实现。
      */
     @Autowired
     private Map<String, ValidateCodeGenerator> validateCodeGenerators;
 
+    @Autowired
+    private ValidateCodeRepository validateCodeRepository;
 
     @Override
     public void create(ServletWebRequest request) throws Exception {
@@ -72,17 +71,7 @@ public abstract class AbstractValidateCodeProcessor<C extends ValidateCode> impl
         // 不保存图片对象到 redis session中，BufferedImage无法序列化
         // 验证时候也不需要图片对象，只要验证code是否正确就ok
         ValidateCode code = new ValidateCode(validateCode.getCode(), validateCode.getExpireTime());
-        sessionStrategy.setAttribute(request, getSessionKey(request), code);
-    }
-
-    /**
-     * 构建验证码放入session时的key
-     *
-     * @param request
-     * @return
-     */
-    private String getSessionKey(ServletWebRequest request) {
-        return SESSION_KEY_PREFIX + getValidateCodeType(request).toString().toUpperCase();
+        validateCodeRepository.save(request, code, getValidateCodeType(request));
     }
 
     /**
@@ -109,39 +98,38 @@ public abstract class AbstractValidateCodeProcessor<C extends ValidateCode> impl
     @Override
     public void validate(ServletWebRequest request) {
 
-        ValidateCodeType processorType = getValidateCodeType(request);
-        String sessionKey = getSessionKey(request);
+        ValidateCodeType codeType = getValidateCodeType(request);
 
-        C codeInSession = (C) sessionStrategy.getAttribute(request, sessionKey);
+        C codeInSession = (C)validateCodeRepository.get(request, codeType);
 
-        String codeInRequest;
+                String codeInRequest;
         try {
             codeInRequest = ServletRequestUtils.getStringParameter(request.getRequest(),
-                    processorType.getParamNameOnValidate());
+                    codeType.getParamNameOnValidate());
         } catch (ServletRequestBindingException e) {
             log.error("获取验证码的值失败");
             e.printStackTrace();
-            throw new ValidateCodeException(ResponseCode.VALIDATE_CODE_REQ_ERROR);
+            throw new ValidateCodeException(ResponseCode.VALIDATE_CODE_REQ_ERROR, codeType);
         }
 
         if (StringUtils.isBlank(codeInRequest)) {
-            throw new ValidateCodeException(ResponseCode.VALIDATE_CODE_IS_BLANK);
+            throw new ValidateCodeException(ResponseCode.VALIDATE_CODE_IS_BLANK, codeType);
         }
 
         if (codeInSession == null) {
-            throw new ValidateCodeException(ResponseCode.VALIDATE_CODE_NOT_EXISTS);
+            throw new ValidateCodeException(ResponseCode.VALIDATE_CODE_NOT_EXISTS, codeType);
         }
 
         if (codeInSession.isExpried()) {
-            sessionStrategy.removeAttribute(request, sessionKey);
-            throw new ValidateCodeException(ResponseCode.VALIDATE_CODE_EXPIRED);
+            validateCodeRepository.remove(request, codeType);
+            throw new ValidateCodeException(ResponseCode.VALIDATE_CODE_EXPIRED, codeType);
         }
 
         if (!StringUtils.equals(codeInSession.getCode(), codeInRequest)) {
-            throw new ValidateCodeException(ResponseCode.VALIDATE_CODE_ERROR);
+            throw new ValidateCodeException(ResponseCode.VALIDATE_CODE_ERROR, codeType);
         }
 
-        sessionStrategy.removeAttribute(request, sessionKey);
+        validateCodeRepository.remove(request, codeType);
     }
 
 }
