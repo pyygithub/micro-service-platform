@@ -1,21 +1,19 @@
 package com.thtf.security;
 
-import org.springframework.boot.web.embedded.tomcat.TomcatEmbeddedWebappClassLoader;
-import org.springframework.boot.web.embedded.tomcat.TomcatServletWebServerFactory;
 import org.springframework.social.connect.Connection;
 import org.springframework.social.connect.ConnectionSignUp;
 import org.springframework.stereotype.Component;
 
 /**
  * ========================
- * 默认用户注册/绑定业务
+ * 没有查询到userId的用户不跳转到注册页面，默认注册一个账户
  * Created with IntelliJ IDEA.
  * User：pyy
  * Date：2019/8/5 14:25
  * Version: v1.0
  * ========================
  */
-@Component
+//@Component
 public class MyConnectionSignUp implements ConnectionSignUp {
 
     @Override

@@ -56,7 +56,7 @@ public class BrowserSecurityConfig extends WebSecurityConfigurerAdapter {
     private ValidateCodeSecurityConfig validateCodeSecurityConfig;
 
     @Autowired
-    private SpringSocialConfigurer mySocialSecurityConfig;
+    private SpringSocialConfigurer customSocialSecurityConfig;
 
     @Autowired
     private SessionInformationExpiredStrategy sessionInformationExpiredStrategy;
@@ -75,7 +75,7 @@ public class BrowserSecurityConfig extends WebSecurityConfigurerAdapter {
                 .and()
             .apply(smsValidateCodeAuthenticationSecurityConfig)
                 .and()
-            .apply(mySocialSecurityConfig)
+            .apply(customSocialSecurityConfig)
                 .and()
             .formLogin()
                 // 当需要身份认证时，跳转到这里

@@ -39,6 +39,9 @@ public class SocialConfig extends SocialConfigurerAdapter {
     @Autowired(required = false)
     private ConnectionSignUp connectionSignUp;
 
+    @Autowired(required = false)
+    private SocialAuthenticationFilterPostProcessor socialAuthenticationFilterPostProcessor;
+
     @Override
     public UsersConnectionRepository getUsersConnectionRepository(ConnectionFactoryLocator connectionFactoryLocator) {
         JdbcUsersConnectionRepository repository = new JdbcUsersConnectionRepository(dataSource,
@@ -50,11 +53,15 @@ public class SocialConfig extends SocialConfigurerAdapter {
         return repository;
     }
 
+    /**
+     * 社交登录配置类，供浏览器或app模块引入设计登录配置用。
+     */
     @Bean
-    public SpringSocialConfigurer mySocialSecurityConfig() {
+    public SpringSocialConfigurer customSocialSecurityConfig() {
         String filterProcessesUrl = securityProperties.getSocial().getFilterProcessesUrl();
-        MySpringSocialConfigurer configurer = new MySpringSocialConfigurer(filterProcessesUrl);
+        CustomSpringSocialConfigurer configurer = new CustomSpringSocialConfigurer(filterProcessesUrl);
         configurer.signupUrl(securityProperties.getBrowser().getSignUpUrl());
+        configurer.setSocialAuthenticationFilterPostProcessor(socialAuthenticationFilterPostProcessor);
         return configurer;
     }
 

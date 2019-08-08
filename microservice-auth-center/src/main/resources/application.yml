@@ -1,5 +1,5 @@
 server:
-  port: 8080
+  port: 80
   servlet:
     session:
       #超时时间，单位：秒 （springboot中最少1分钟，默认 30分钟）
@@ -24,11 +24,11 @@ spring:
     #连接超时时间
     timeout: 5000
 
-#Security 配置
+# 自定义Security 配置
 security:
   browser:
     # 自定义系统登录页面地址
-    #loginPage: /login.html
+    loginPage: /login.html
     # 系统注册页面
     signUpUrl: /signUp.html
     # 登录类型配置：JSON（默认）  REDIRECT
@@ -59,10 +59,17 @@ security:
   social:
     filterProcessesUrl: /auth
     qq:
-      appId: 101744435
-      appSecret: 15abaee5e181376117ac7020a032fb5e
+      appId: 101756996
+      appSecret: 6a391a9343bd20b7aa1c21e4d8538c72
       providerId: qq
     wechat:
       appId: wxd99431bbff8305a0
       appSecret: 60f78681d063590a469f1b297feff3c4
       providerId: wechat
+#
+## OAuth2配置
+#security:
+#  oauth2:
+#    client:
+#      client-id: aaa
+#      client-secret: bbb

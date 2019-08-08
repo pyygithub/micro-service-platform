@@ -40,6 +40,7 @@ public enum ResponseCode {
     CLIENT_ID_REQUIRED(200013, "请在请求头中携带deviceId参数"),
     USER_DISALBED(20013, "账号已被禁用"),
     USER_LOCKED(20014, "账号被锁定"),
+    NOT_FOUND_APPSCRIPT(20015, "无法找到缓存的用户社交账号信息"),
 
     /* 权限错误：70001-79999 */
     PERMISSION_UNAUTHORISE(70002,"权限不足，无权操作！"),
