@@ -21,7 +21,7 @@ public class WechatServiceProvider  extends AbstractOAuth2ServiceProvider<Wechat
     /**
      * 微信获取accessToken的url
      */
-    private static final String URL_ACCESS_TOKEN = "https://api.weixin.qq.com/sns/oauth2/access_token";
+    private static final String URL_ACCESS_TOKEN = "https://api.weixin.qq.com/sns/jwt/access_token";
 
     /**
      * @param appId

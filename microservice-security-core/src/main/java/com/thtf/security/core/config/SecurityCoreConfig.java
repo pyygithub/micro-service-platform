@@ -1,4 +1,4 @@
-package com.thtf.security.core;
+package com.thtf.security.core.config;
 
 import com.thtf.security.core.properties.SecurityProperties;
 import org.springframework.boot.context.properties.EnableConfigurationProperties;

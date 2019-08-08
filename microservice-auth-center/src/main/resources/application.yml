@@ -1,3 +1,4 @@
+# 服务器配置
 server:
   port: 80
   servlet:
@@ -5,16 +6,17 @@ server:
       #超时时间，单位：秒 （springboot中最少1分钟，默认 30分钟）
       timeout: 600
 
+# spring-session集群配置
 spring:
   session:
-    #关闭spring-session
     store-type: redis
-
+  # 数据库连接池
   datasource:
     driver-class-name: com.mysql.jdbc.Driver
     url: jdbc:mysql://127.0.0.1:3306/auth_center?useUnicode=yes&characterEncoding=UTF-8&useSSL=false
     username: root
     password: 123456
+  # redis配置
   redis:
     #数据库索引
     database: 1
@@ -25,51 +27,72 @@ spring:
     timeout: 5000
 
 # 自定义Security 配置
-security:
-  browser:
-    # 自定义系统登录页面地址
-    loginPage: /login.html
-    # 系统注册页面
-    signUpUrl: /signUp.html
-    # 登录类型配置：JSON（默认）  REDIRECT
-    loginType: JSON
-    # 登录成功页面
-    signOutUrl: /signOut.html
-    # 静态资源放行
-    staticResources: /static/**
+microservice:
+  security:
+    # 浏览器安全配置
+    browser:
+      # 自定义系统登录页面地址
+      loginPage: /login.html
+      # 系统注册页面
+      signUpUrl: /signUp.html
+      # 登录类型配置：JSON（默认）  REDIRECT
+      loginType: JSON
+      # 登录成功页面
+      signOutUrl: /signOut.html
+      # 静态资源放行
+      staticResources: /static/**
+      # session配置
+      session:
+        # 同一个用户在系统中的最大session数，默认1
+        maximumSessions: 1
+        # 达到最大session时是否阻止新的登录请求，默认为false，不阻止，新的登录会将老的登录失效掉
+        maxSessionsPreventsLogin: false
+        # session失效时跳转的地址
+        sessionInvalidUrl: http://www.baidu.com
 
-    session:
-      # 同一个用户在系统中的最大session数，默认1
-      maximumSessions: 1
-      # 达到最大session时是否阻止新的登录请求，默认为false，不阻止，新的登录会将老的登录失效掉
-      maxSessionsPreventsLogin: false
-      # session失效时跳转的地址
-      sessionInvalidUrl: http://www.baidu.com
+    # 验证码配置
+    code:
+      image:
+        length: 4
+        height: 23
+        width: 67
+        expireIn: 60
+        # 执行校验路径
+        url: /user/login
 
-  # 验证码配置
-  code:
-    image:
-      length: 4
-      height: 23
-      width: 67
-      expireIn: 60
-      url: /user/login
+    # social三方登录配置
+    social:
+      filterProcessesUrl: /auth
+      qq:
+        appId: 101756996
+        appSecret: 6a391a9343bd20b7aa1c21e4d8538c72
+        providerId: qq
+      wechat:
+        appId: wxd99431bbff8305a0
+        appSecret: 60f78681d063590a469f1b297feff3c4
+        providerId: wechat
 
-  # 三方登录
-  social:
-    filterProcessesUrl: /auth
-    qq:
-      appId: 101756996
-      appSecret: 6a391a9343bd20b7aa1c21e4d8538c72
-      providerId: qq
-    wechat:
-      appId: wxd99431bbff8305a0
-      appSecret: 60f78681d063590a469f1b297feff3c4
-      providerId: wechat
-#
-## OAuth2配置
-#security:
-#  oauth2:
-#    client:
-#      client-id: aaa
-#      client-secret: bbb
+    # oauth2配置
+    oauth2:
+      # token 存储方式 jwt（默认） redis
+      tokenStore: jwt
+      clients:
+        -
+          clientId: myclientId
+          clientSecret: myclientSecret
+          redirectUris:
+            - "http://example.com"
+            - "http://ora.com"
+          accessTokenValiditySeconds: 3600
+          authorizedGrantTypes: ["refresh_token", "password"]
+        -
+          clientId: myid2
+          clientSecret: myid2
+          authorizedGrantTypes: ["refresh_token", "password"]
+          redirectUris:
+            - "http://example.com"
+            - "localhost:8080"
+          scopes: ["all", "read", "write"]
+          accessTokenValiditySeconds: 7200
+    # 使用jwt时为token签名的秘钥
+    jwtSigningKey: thtf

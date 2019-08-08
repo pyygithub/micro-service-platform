@@ -31,7 +31,7 @@ public class WechatOAuth2Template  extends OAuth2Template {
 
     private String accessTokenUrl;
 
-    private static final String REFRESH_TOKEN_URL = "https://api.weixin.qq.com/sns/oauth2/refresh_token";
+    private static final String REFRESH_TOKEN_URL = "https://api.weixin.qq.com/sns/jwt/refresh_token";
 
 
     public WechatOAuth2Template(String clientId, String clientSecret, String authorizeUrl, String accessTokenUrl) {

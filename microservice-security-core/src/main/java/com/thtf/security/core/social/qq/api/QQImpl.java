@@ -16,7 +16,7 @@ import org.springframework.social.oauth2.TokenStrategy;
  */
 @Slf4j
 public class QQImpl extends AbstractOAuth2ApiBinding implements QQ {
-    private static final String URL_GET_OPENID = "https://graph.qq.com/oauth2.0/me?access_token=%s";
+    private static final String URL_GET_OPENID = "https://graph.qq.com/jwt.0/me?access_token=%s";
 
     private static final String URL_GET_USERINFO = "https://graph.qq.com/user/get_user_info?oauth_consumer_key=%s&openid=%s";
 

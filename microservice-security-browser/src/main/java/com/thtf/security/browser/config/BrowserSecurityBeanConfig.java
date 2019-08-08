@@ -1,4 +1,4 @@
-package com.thtf.security.browser;
+package com.thtf.security.browser.config;
 
 import com.thtf.security.browser.logout.CustomLogoutSuccessHandler;
 import com.thtf.security.browser.session.CustomExpiredSessionStrategy;

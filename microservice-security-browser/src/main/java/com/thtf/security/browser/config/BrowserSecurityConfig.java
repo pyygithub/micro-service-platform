@@ -1,35 +1,39 @@
-package com.thtf.security.app;
+package com.thtf.security.browser.config;
 
-import com.thtf.security.app.social.openid.OpenIdAuthenticationSecurityConfig;
 import com.thtf.security.core.authentication.mobile.SmsValidateCodeAuthenticationSecurityConfig;
 import com.thtf.security.core.properties.SecurityConstants;
 import com.thtf.security.core.properties.SecurityProperties;
 import com.thtf.security.core.validate.code.ValidateCodeSecurityConfig;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
-import org.springframework.security.oauth2.config.annotation.web.configuration.EnableResourceServer;
-import org.springframework.security.oauth2.config.annotation.web.configuration.ResourceServerConfigurerAdapter;
+import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
+import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
+import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.web.authentication.AuthenticationFailureHandler;
 import org.springframework.security.web.authentication.AuthenticationSuccessHandler;
 import org.springframework.security.web.authentication.logout.LogoutSuccessHandler;
+import org.springframework.security.web.authentication.rememberme.JdbcTokenRepositoryImpl;
+import org.springframework.security.web.authentication.rememberme.PersistentTokenRepository;
 import org.springframework.security.web.session.InvalidSessionStrategy;
+import org.springframework.security.web.session.SessionInformationExpiredStrategy;
 import org.springframework.social.security.SpringSocialConfigurer;
 
 import javax.sql.DataSource;
 
 /**
  * ========================
- * 资源服务器
  * Created with IntelliJ IDEA.
  * User：pyy
- * Date：2019/8/6 17:22
+ * Date：2019/7/30 14:48
  * Version: v1.0
  * ========================
  */
 @Configuration
-@EnableResourceServer
-public class CustomResourceServerConfig extends ResourceServerConfigurerAdapter {
+@EnableWebSecurity
+public class BrowserSecurityConfig extends WebSecurityConfigurerAdapter {
+
     @Autowired
     private SecurityProperties securityProperties;
 
@@ -37,10 +41,10 @@ public class CustomResourceServerConfig extends ResourceServerConfigurerAdapter 
     private DataSource dataSource;
 
     @Autowired
-    private ValidateCodeSecurityConfig validateCodeSecurityConfig;
+    private AuthenticationSuccessHandler myAuthenticationSuccessHandler;
 
     @Autowired
-    private AuthenticationSuccessHandler myAuthenticationSuccessHandler;
+    private UserDetailsService userDetailsService;
 
     @Autowired
     private SmsValidateCodeAuthenticationSecurityConfig smsValidateCodeAuthenticationSecurityConfig;
@@ -49,23 +53,31 @@ public class CustomResourceServerConfig extends ResourceServerConfigurerAdapter 
     private AuthenticationFailureHandler myAuthenticationFailureHandler;
 
     @Autowired
+    private ValidateCodeSecurityConfig validateCodeSecurityConfig;
+
+    @Autowired
     private SpringSocialConfigurer customSocialSecurityConfig;
 
     @Autowired
-    private OpenIdAuthenticationSecurityConfig openIdAuthenticationSecurityConfig;
+    private SessionInformationExpiredStrategy sessionInformationExpiredStrategy;
+
+    @Autowired
+    private InvalidSessionStrategy invalidSessionStrategy;
+
+    @Autowired
+    private LogoutSuccessHandler logoutSuccessHandler;
+
 
     @Override
-    public void configure(HttpSecurity http) throws Exception {
+    protected void configure(HttpSecurity http) throws Exception {
 
         http.apply(validateCodeSecurityConfig)
                 .and()
-                .apply(openIdAuthenticationSecurityConfig)
+            .apply(smsValidateCodeAuthenticationSecurityConfig)
                 .and()
-                .apply(smsValidateCodeAuthenticationSecurityConfig)
+            .apply(customSocialSecurityConfig)
                 .and()
-                .apply(customSocialSecurityConfig)
-                .and()
-             .formLogin()
+            .formLogin()
                 // 当需要身份认证时，跳转到这里
                 .loginPage(SecurityConstants.DEFAULT_UNAUTHENTICATION_URL)
                 // 自定义登录提交地址（默认： /login）
@@ -75,25 +87,51 @@ public class CustomResourceServerConfig extends ResourceServerConfigurerAdapter 
                 // 登录失败处理器
                 .failureHandler(myAuthenticationFailureHandler)
                 .and()
-             .authorizeRequests()
+            .rememberMe()
+                .tokenRepository(persistentTokenRepository())
+                .tokenValiditySeconds(securityProperties.getBrowser().getRememberMeSeconds())
+                .userDetailsService(userDetailsService)
+                .and()
+            .sessionManagement()
+                .invalidSessionStrategy(invalidSessionStrategy)
+                .maximumSessions(securityProperties.getBrowser().getSession().getMaximumSessions())
+                .maxSessionsPreventsLogin(securityProperties.getBrowser().getSession().isMaxSessionsPreventsLogin())
+                .expiredSessionStrategy(sessionInformationExpiredStrategy)
+                .and()
+                .and()
+            .logout()
+                // 配置退出的url
+                .logoutUrl("/signOut")
+                // 配置退出登录成功处理器
+                .logoutSuccessHandler(logoutSuccessHandler)
+                // 配置退出登录成功后删除cookies
+                .deleteCookies("JSESSIONID")
+                .and()
+            .authorizeRequests()
                 // 不需要认证请求
                 .antMatchers(
                         SecurityConstants.DEFAULT_UNAUTHENTICATION_URL,
                         SecurityConstants.DEFAULT_LOGIN_PROCESSING_URL_MOBILE,
-                        SecurityConstants.DEFAULT_LOGIN_PROCESSING_URL_OPENID,
-                        SecurityConstants.DEFAULT_SOCIAL_SIGN_UP_URL,
                         SecurityConstants.DEFAULT_LOGIN_PAGE_URL,
                         securityProperties.getBrowser().getLoginPage(),
                         securityProperties.getBrowser().getSignUpUrl(),
                         SecurityConstants.DEFAULT_VALIDATE_CODE_URL_PREFIX + "/*",
                         securityProperties.getBrowser().getStaticResources(),
                         securityProperties.getBrowser().getSignOutUrl(),
-                        "/user/app/binding", "/session/invalid", "/qqLogin"
+                        "/user/binding", "/session/invalid"
                 ).permitAll()
 
                 // 其它所有请求必须验证后才可以访问
                 .anyRequest().authenticated()
                 .and().csrf().disable();
 
+    }
+
+    @Bean
+    public PersistentTokenRepository persistentTokenRepository() {
+        JdbcTokenRepositoryImpl tokenRepository = new JdbcTokenRepositoryImpl();
+        tokenRepository.setDataSource(dataSource);
+		//tokenRepository.setCreateTableOnStartup(true);
+        return tokenRepository;
     }
 }
