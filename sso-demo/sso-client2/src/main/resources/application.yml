@@ -1,0 +1,22 @@
+security:
+  oauth2:
+    client:
+      clientId: myclient2
+      clientSecret: myclientsecret2
+      # 授权地址
+      user-authorization-uri: http://127.0.0.1:9999/server/oauth/authorize
+      # 获取token地址
+      access-token-uri: http://127.0.0.1:9999/server/oauth/token
+    resource:
+      jwt:
+        # 获取token key地址
+        key-value: thtf
+        key-uri: http://127.0.0.1:9999/server/oauth/token_key
+        user-info-uri: http://127.0.0.1:9999/server/user
+        token-info-uri: http://127.0.0.1:9999/server/oauth/check_token
+        preferTokenInfo: false
+
+server:
+  port: 8082
+  servlet:
+    context-path: /client2

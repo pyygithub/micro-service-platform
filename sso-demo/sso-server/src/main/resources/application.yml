@@ -1,0 +1,10 @@
+server:
+  port: 9999
+  servlet:
+    context-path: /server
+
+security:
+  user:
+    password: 123456
+  basic:
+    enabled: true
