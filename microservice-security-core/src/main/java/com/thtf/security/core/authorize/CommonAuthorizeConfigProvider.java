@@ -25,7 +25,7 @@ public class CommonAuthorizeConfigProvider implements AuthorizeConfigProvider {
     private SecurityProperties securityProperties;
 
     @Override
-    public void config(ExpressionUrlAuthorizationConfigurer<HttpSecurity>.ExpressionInterceptUrlRegistry config) {
+    public boolean config(ExpressionUrlAuthorizationConfigurer<HttpSecurity>.ExpressionInterceptUrlRegistry config) {
         // 不需要认证请求
         config.antMatchers(
                 SecurityConstants.DEFAULT_UNAUTHENTICATION_URL,
@@ -43,5 +43,6 @@ public class CommonAuthorizeConfigProvider implements AuthorizeConfigProvider {
         if (signOutUrl != null) {
             config.antMatchers(signOutUrl).permitAll();
         }
+        return false;
     }
 }

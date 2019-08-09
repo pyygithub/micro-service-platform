@@ -20,7 +20,7 @@ import org.springframework.stereotype.Component;
 public class DemoAuthorizeConfigProvider implements AuthorizeConfigProvider {
 
     @Override
-    public void config(ExpressionUrlAuthorizationConfigurer<HttpSecurity>.ExpressionInterceptUrlRegistry config) {
+    public boolean config(ExpressionUrlAuthorizationConfigurer<HttpSecurity>.ExpressionInterceptUrlRegistry config) {
         config.antMatchers(
                 "/user/browser/binding", // 注册请求
                 "/user/app/binding", // 注册请求
@@ -38,5 +38,6 @@ public class DemoAuthorizeConfigProvider implements AuthorizeConfigProvider {
 
         // 使用自定义的
         config.anyRequest().access("@rbacService.hasPermission(request,authentication)");
+        return true;
     }
 }

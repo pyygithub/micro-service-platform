@@ -25,10 +25,21 @@ public class DefaultAuthorizeConfigManager implements AuthorizeConfigManager {
 
     @Override
     public void config(ExpressionUrlAuthorizationConfigurer<HttpSecurity>.ExpressionInterceptUrlRegistry config) {
+        boolean existAnyRequestConfig = false;
+        String existAnyRequestConfigName = null;
+
         for (AuthorizeConfigProvider provider : providers) {
-            provider.config(config);
+            boolean currentIsAnyRequestConfig = provider.config(config);
+            if (existAnyRequestConfig && currentIsAnyRequestConfig) {
+                throw new RuntimeException("重复的anyRequest配置:" + existAnyRequestConfigName + "," + provider.getClass().getSimpleName());
+            } else if (currentIsAnyRequestConfig) {
+                existAnyRequestConfig = true;
+                existAnyRequestConfigName = provider.getClass().getSimpleName();
+            }
         }
-        // 除了上面配置的，其他的都需要登录后才能访问
-        config.anyRequest().authenticated();
+        if(!existAnyRequestConfig){
+            // 除了上面配置的，其他的都需要登录后才能访问
+            config.anyRequest().authenticated();
+        }
     }
 }

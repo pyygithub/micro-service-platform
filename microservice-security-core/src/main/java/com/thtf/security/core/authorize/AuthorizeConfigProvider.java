@@ -17,6 +17,6 @@ public interface AuthorizeConfigProvider {
      * @param config
      * @see HttpSecurity#authorizeRequests()
      */
-    void config(ExpressionUrlAuthorizationConfigurer<HttpSecurity>.ExpressionInterceptUrlRegistry config);
+    boolean config(ExpressionUrlAuthorizationConfigurer<HttpSecurity>.ExpressionInterceptUrlRegistry config);
 
 }
