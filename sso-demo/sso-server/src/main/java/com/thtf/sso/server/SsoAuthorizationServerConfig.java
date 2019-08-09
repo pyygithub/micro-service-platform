@@ -2,7 +2,6 @@ package com.thtf.sso.server;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
-import org.springframework.core.annotation.Order;
 import org.springframework.security.crypto.password.NoOpPasswordEncoder;
 import org.springframework.security.oauth2.config.annotation.configurers.ClientDetailsServiceConfigurer;
 import org.springframework.security.oauth2.config.annotation.web.configuration.AuthorizationServerConfigurerAdapter;
@@ -24,7 +23,6 @@ import org.springframework.security.oauth2.provider.token.store.JwtTokenStore;
  */
 @Configuration
 @EnableAuthorizationServer
-@Order(1)
 public class SsoAuthorizationServerConfig extends AuthorizationServerConfigurerAdapter {
 
     @Override
@@ -35,14 +33,14 @@ public class SsoAuthorizationServerConfig extends AuthorizationServerConfigurerA
                 .authorizedGrantTypes("authorization_code", "refresh_token")
                 .scopes("all")
                 .redirectUris(
-                        "http://localhost:8081/client1/login")
+                        "http://127.0.0.1:8081/client1/login")
                 .and()
                 .withClient("myclient2")
                 .secret("myclientsecret2")
                 .authorizedGrantTypes("authorization_code", "refresh_token")
                 .scopes("all")
                 .redirectUris(
-                        "http://localhost:8082/client2/login");
+                        "http://127.0.0.1:8082/client2/login");
     }
 
     @Override
@@ -68,5 +66,7 @@ public class SsoAuthorizationServerConfig extends AuthorizationServerConfigurerA
         converter.setSigningKey("thtf");
         return converter;
     }
+
+
 
 }
