@@ -1,6 +1,7 @@
 package com.thtf.security.browser.config;
 
 import com.thtf.security.core.authentication.mobile.SmsValidateCodeAuthenticationSecurityConfig;
+import com.thtf.security.core.authorize.AuthorizeConfigManager;
 import com.thtf.security.core.properties.SecurityConstants;
 import com.thtf.security.core.properties.SecurityProperties;
 import com.thtf.security.core.validate.code.ValidateCodeSecurityConfig;
@@ -67,16 +68,15 @@ public class BrowserSecurityConfig extends WebSecurityConfigurerAdapter {
     @Autowired
     private LogoutSuccessHandler logoutSuccessHandler;
 
+    @Autowired
+    private AuthorizeConfigManager authorizeConfigManager;
 
     @Override
     protected void configure(HttpSecurity http) throws Exception {
 
-        http.apply(validateCodeSecurityConfig)
-                .and()
-            .apply(smsValidateCodeAuthenticationSecurityConfig)
-                .and()
-            .apply(customSocialSecurityConfig)
-                .and()
+        http.apply(validateCodeSecurityConfig).and()
+            .apply(smsValidateCodeAuthenticationSecurityConfig).and()
+            .apply(customSocialSecurityConfig).and()
             .formLogin()
                 // 当需要身份认证时，跳转到这里
                 .loginPage(SecurityConstants.DEFAULT_UNAUTHENTICATION_URL)
@@ -107,23 +107,10 @@ public class BrowserSecurityConfig extends WebSecurityConfigurerAdapter {
                 // 配置退出登录成功后删除cookies
                 .deleteCookies("JSESSIONID")
                 .and()
-            .authorizeRequests()
-                // 不需要认证请求
-                .antMatchers(
-                        SecurityConstants.DEFAULT_UNAUTHENTICATION_URL,
-                        SecurityConstants.DEFAULT_LOGIN_PROCESSING_URL_MOBILE,
-                        SecurityConstants.DEFAULT_LOGIN_PAGE_URL,
-                        securityProperties.getBrowser().getLoginPage(),
-                        securityProperties.getBrowser().getSignUpUrl(),
-                        SecurityConstants.DEFAULT_VALIDATE_CODE_URL_PREFIX + "/*",
-                        securityProperties.getBrowser().getStaticResources(),
-                        securityProperties.getBrowser().getSignOutUrl(),
-                        "/user/binding", "/session/invalid"
-                ).permitAll()
-
-                // 其它所有请求必须验证后才可以访问
-                .anyRequest().authenticated()
-                .and().csrf().disable();
+            .csrf()
+                .disable();
+        // 引入通用配置
+        authorizeConfigManager.config(http.authorizeRequests());
 
     }
 
